@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { useGetContactQuery } from '../../redux/ContactsApi';
-import ContactListItem from '../ContactListItem';
+import { useGetContactQuery } from 'redux/ContactsApi';
+import ContactListItem from 'Components/ContactListItem';
 import { Spinner } from '@chakra-ui/react';
 import s from './ContactList.module.css';
 

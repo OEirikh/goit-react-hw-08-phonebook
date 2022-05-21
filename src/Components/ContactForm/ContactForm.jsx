@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  useAddContactsMutation,
-  useGetContactQuery,
-} from '../../redux/ContactsApi';
+import { useAddContactsMutation, useGetContactQuery } from 'redux/ContactsApi';
 import { toast } from 'react-toastify';
 import s from './ContactForm.module.css';
 
@@ -38,14 +35,12 @@ function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
     setnameForToast(name);
-
     data.every(item => item.name.toLowerCase() !== name.toLowerCase())
       ? addContacts({
           name: name,
           phone: number,
         })
       : toast.error(`${name} is alredy in contacts!!!`);
-
     setName('');
     setNumber('');
   };
