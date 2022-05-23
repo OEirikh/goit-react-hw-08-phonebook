@@ -10,13 +10,18 @@ function ContactList() {
 
   const contacts =
     data && data.filter(contact => contact.name.toLowerCase().includes(filter));
+
   return (
     <>
       {data && data.length !== 0 && (
         <ul className={s.contactList}>
-          {contacts.map(contact => (
-            <ContactListItem key={contact.id} {...contact} />
-          ))}
+          {contacts.length !== 0 ? (
+            contacts.map(contact => (
+              <ContactListItem key={contact.id} {...contact} />
+            ))
+          ) : (
+            <p>no search contacts: {filter}</p>
+          )}
         </ul>
       )}
       {data && data.length === 0 && <p>'You have no contacts'</p>}
