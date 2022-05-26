@@ -1,9 +1,18 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import s from 'Components/ContactForm/ContactForm.module.css';
+import { useUserSignupMutation } from 'redux/AuthApi';
+import { setUser } from 'redux/AuthSlise';
+
 export default function RegisterView() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const [userSignup, { data, error, isError, isSuccess }] =
+    useUserSignupMutation();
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
@@ -21,9 +30,23 @@ export default function RegisterView() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    await userSignup({ name, email, password });
 
+    isSuccess &&
+      dispatch(
+        setUser({
+          user: {
+            name: data.user.name,
+            email: data.user.email,
+          },
+          token: data.token,
+          isLoggedIn: true,
+        })
+      );
+
+    setName('');
     setEmail('');
     setPassword('');
   };
@@ -31,10 +54,7 @@ export default function RegisterView() {
   return (
     <div>
       <h1>RegisterView</h1>
-      <form
-        // autoComplete="off"
-        onSubmit={handleSubmit}
-      >
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <label className={s.form}>
           <p>Name</p>
           <input
@@ -56,7 +76,8 @@ export default function RegisterView() {
           <input
             onChange={handleInputChange}
             value={password}
-            type="text"
+            type="password"
+            minLength={7}
             name="password"
             className={s.input}
           />
