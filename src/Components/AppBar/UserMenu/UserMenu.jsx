@@ -1,12 +1,29 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserName } from 'redux/AuthSlise';
+import { useUserLogoutMutation } from 'redux/AuthApi';
+import { logOutUser } from 'redux/AuthSlise';
 // import PropTypes from 'prop-types'
 
-function UserMenu(props) {
+function UserMenu() {
+  const name = useSelector(getUserName);
+  const [userLogout, { data, isError, error }] = useUserLogoutMutation();
+  const dispatch = useDispatch();
+  console.log('data', data, 'error', error, isError);
+
   return (
     <div>
       <h2>UserMenu</h2>
-      <p>'username'</p>
-      <button type="button">LogOut</button>
+      <p>Hey!{name}</p>
+      <button
+        type="button"
+        onClick={() => {
+          userLogout();
+          dispatch(logOutUser());
+        }}
+      >
+        LogOut
+      </button>
     </div>
   );
 }

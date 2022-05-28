@@ -16,8 +16,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { FilterSlice } from './FilterSlice';
 import { ContactsApi } from './ContactsApi';
+import { AuthApi } from './AuthApi';
+import { FilterSlice } from './FilterSlice';
 import { AuthSlice } from './AuthSlise';
 
 const authPersistConfig = {
@@ -31,6 +32,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     filter: FilterSlice.reducer,
+    [AuthApi.reducerPath]: AuthApi.reducer,
     [ContactsApi.reducerPath]: ContactsApi.reducer,
   },
 
@@ -40,10 +42,13 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    AuthApi.middleware,
     ContactsApi.middleware,
   ],
 });
 
 export const persistor = persistStore(store);
+
+console.log(store);
 
 setupListeners(store.dispatch);

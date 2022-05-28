@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import s from 'Components/ContactForm/ContactForm.module.css';
 import { useUserSignupMutation } from 'redux/AuthApi';
@@ -11,8 +11,11 @@ export default function RegisterView() {
 
   const dispatch = useDispatch();
 
-  const [userSignup, { data, error, isError, isSuccess }] =
-    useUserSignupMutation();
+  const [userSignup, { data }] = useUserSignupMutation();
+
+  useEffect(() => {
+    data && dispatch(setUser(data));
+  }, [data, dispatch]);
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
@@ -33,19 +36,6 @@ export default function RegisterView() {
   const handleSubmit = async e => {
     e.preventDefault();
     await userSignup({ name, email, password });
-
-    isSuccess &&
-      dispatch(
-        setUser({
-          user: {
-            name: data.user.name,
-            email: data.user.email,
-          },
-          token: data.token,
-          isLoggedIn: true,
-        })
-      );
-
     setName('');
     setEmail('');
     setPassword('');
