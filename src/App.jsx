@@ -1,7 +1,7 @@
 import React from 'react';
 import s from 'App.module.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ChakraProvider } from '@chakra-ui/react';
 import { getToken } from 'redux/AuthSlise';
@@ -30,6 +30,7 @@ function App() {
             <Route path="/register" element={<RegisterView />} />
             <Route path="/login" element={<LoginView />} />
             <Route path="/contacts" element={<ContactsView />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Container>
 

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import s from './ContactListItem.module.css';
 import { useDeleteContactsMutation } from 'redux/ContactsApi';
 
-function ContactListItem({ name, phone, id }) {
+function ContactListItem({ name, number, id }) {
   const [deleteContacts, { isLoading: isDeleting, isSuccess, error }] =
     useDeleteContactsMutation();
 
@@ -16,7 +16,7 @@ function ContactListItem({ name, phone, id }) {
   return (
     <li className={s.contact} key={id}>
       <p>
-        {name}: {phone}
+        {name}: {number}
       </p>
       <button
         className={s.button}
@@ -32,7 +32,7 @@ function ContactListItem({ name, phone, id }) {
 
 ContactListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 

@@ -35,7 +35,6 @@ export const AuthSlice = createSlice({
         state.isLoggedin = true;
       }
     );
-
     builder.addMatcher(
       AuthApi.endpoints.userLogout.matchFulfilled,
       (state, _) => {

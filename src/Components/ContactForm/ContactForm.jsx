@@ -38,7 +38,7 @@ function ContactForm() {
     data.every(item => item.name.toLowerCase() !== name.toLowerCase())
       ? addContacts({
           name: name,
-          phone: number,
+          number: number,
         })
       : toast.error(`${name} is alredy in contacts!!!`);
     setName('');
