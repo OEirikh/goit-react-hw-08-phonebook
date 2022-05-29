@@ -1,4 +1,4 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import s from 'App.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -8,12 +8,12 @@ import { getToken } from 'redux/AuthSlise';
 import { useGetCurrentUserQuery } from 'redux/AuthApi';
 import { useSelector } from 'react-redux';
 
-import HomeView from 'views/HomeView';
-import RegisterView from 'views/RegisterView';
-import LoginView from 'views/LoginView';
-import ContactsView from 'views/ContactsView';
-
 import AppBar from 'Components/AppBar';
+
+const HomeView = lazy(() => import('views/HomeView'));
+const RegisterView = lazy(() => import('views/RegisterView'));
+const LoginView = lazy(() => import('views/LoginView'));
+const ContactsView = lazy(() => import('views/ContactsView'));
 
 function App() {
   const token = useSelector(getToken);
@@ -21,23 +21,25 @@ function App() {
 
   return (
     <div className={s.App}>
-      <ChakraProvider>
-        <AppBar />
+      <Suspense>
+        <ChakraProvider>
+          <AppBar />
 
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/contacts" element={<ContactsView />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="/register" element={<RegisterView />} />
+            <Route path="/login" element={<LoginView />} />
+            <Route path="/contacts" element={<ContactsView />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
 
-        <ToastContainer
-          autoClose={2000}
-          position="top-right"
-          hideProgressBar={true}
-        />
-      </ChakraProvider>
+          <ToastContainer
+            autoClose={2000}
+            position="top-right"
+            hideProgressBar={true}
+          />
+        </ChakraProvider>
+      </Suspense>
     </div>
   );
 }
