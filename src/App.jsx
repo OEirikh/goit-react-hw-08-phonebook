@@ -12,7 +12,7 @@ import HomeView from 'views/HomeView';
 import RegisterView from 'views/RegisterView';
 import LoginView from 'views/LoginView';
 import ContactsView from 'views/ContactsView';
-import Container from 'Components/Container';
+
 import AppBar from 'Components/AppBar';
 
 function App() {
@@ -22,17 +22,15 @@ function App() {
   return (
     <div className={s.App}>
       <ChakraProvider>
-        <Container>
-          <AppBar />
+        <AppBar />
 
-          <Routes>
-            <Route path="/" element={<HomeView />} />
-            <Route path="/register" element={<RegisterView />} />
-            <Route path="/login" element={<LoginView />} />
-            <Route path="/contacts" element={<ContactsView />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Container>
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/register" element={<RegisterView />} />
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/contacts" element={<ContactsView />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
 
         <ToastContainer
           autoClose={2000}

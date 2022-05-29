@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 import { getUserName } from 'redux/AuthSlise';
 import { useUserLogoutMutation } from 'redux/AuthApi';
@@ -6,7 +7,7 @@ import { useUserLogoutMutation } from 'redux/AuthApi';
 
 function UserMenu() {
   const name = useSelector(getUserName);
-  const [userLogout] = useUserLogoutMutation();
+  const [userLogout, { isSuccess }] = useUserLogoutMutation();
 
   return (
     <div>

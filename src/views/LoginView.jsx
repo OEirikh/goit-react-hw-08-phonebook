@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import s from 'Components/ContactForm/ContactForm.module.css';
 import { useUserLoginMutation } from 'redux/AuthApi';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userLogin] = useUserLoginMutation();
+  const [userLogin, { isSuccess }] = useUserLoginMutation();
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
@@ -26,13 +27,14 @@ export default function LoginView() {
       email: email,
       password: password,
     });
-
+    // isSuccess && <Navigate to="/contacts" replace={true} />;
     setEmail('');
     setPassword('');
   };
 
   return (
     <div>
+      {isSuccess && <Navigate to="/contacts" replace={true} />}
       <h1>LoginView</h1>
       <form
         // autoComplete="off"

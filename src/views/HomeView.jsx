@@ -6,6 +6,7 @@ import {
   VStack,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 export default function WithBackgroundImage() {
   return (
@@ -31,25 +32,28 @@ export default function WithBackgroundImage() {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
           >
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-            eiusmod tempor
+            Welcome, to use all the features, please register or log in
           </Text>
           <Stack direction={'row'}>
             <Button
+              as={NavLink}
+              to="register"
               bg={'blue.400'}
               rounded={'full'}
               color={'white'}
               _hover={{ bg: 'blue.500' }}
             >
-              Show me more
+              Sing up
             </Button>
             <Button
+              as={NavLink}
+              to="login"
               bg={'whiteAlpha.300'}
               rounded={'full'}
               color={'white'}
               _hover={{ bg: 'whiteAlpha.500' }}
             >
-              Show me more
+              Log in
             </Button>
           </Stack>
         </Stack>
