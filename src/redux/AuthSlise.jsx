@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { AuthApi } from './AuthApi';
 
 const initialState = {
   user: { name: '', email: '' },
@@ -9,22 +10,41 @@ const initialState = {
 export const AuthSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setUser(state, { payload }) {
-      console.log(payload);
-      state.user = payload.user;
-      state.token = payload.token;
-      state.isLoggedin = true;
-    },
 
-    logOutUser(state, _) {
-      return (state = initialState);
-    },
+  extraReducers: builder => {
+    builder.addMatcher(
+      AuthApi.endpoints.getCurrentUser.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload;
+        state.isLoggedin = true;
+      }
+    );
+    builder.addMatcher(
+      AuthApi.endpoints.userSignup.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLoggedin = true;
+      }
+    );
+    builder.addMatcher(
+      AuthApi.endpoints.userLogin.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user;
+        state.token = payload.token;
+        state.isLoggedin = true;
+      }
+    );
+
+    builder.addMatcher(
+      AuthApi.endpoints.userLogout.matchFulfilled,
+      (state, _) => {
+        return (state = initialState);
+      }
+    );
   },
 });
 
 export const getUserName = state => state.auth.user.name;
 export const getToken = state => state.auth.token;
-export const getIsLogin = state => state.auth.isLoggedin;
-
-export const { setUser, logOutUser } = AuthSlice.actions;
+export const getLoggedin = state => state.auth.isLoggedin;

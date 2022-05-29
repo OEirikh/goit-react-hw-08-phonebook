@@ -4,6 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ChakraProvider } from '@chakra-ui/react';
+import { getToken } from 'redux/AuthSlise';
+import { useGetCurrentUserQuery } from 'redux/AuthApi';
+import { useSelector } from 'react-redux';
+
 import HomeView from 'views/HomeView';
 import RegisterView from 'views/RegisterView';
 import LoginView from 'views/LoginView';
@@ -12,6 +16,9 @@ import Container from 'Components/Container';
 import AppBar from 'Components/AppBar';
 
 function App() {
+  const token = useSelector(getToken);
+  useGetCurrentUserQuery(null, { skip: !token });
+
   return (
     <div className={s.App}>
       <ChakraProvider>
@@ -19,7 +26,7 @@ function App() {
           <AppBar />
 
           <Routes>
-            <Route index element={<HomeView />} />
+            <Route path="/" element={<HomeView />} />
             <Route path="/register" element={<RegisterView />} />
             <Route path="/login" element={<LoginView />} />
             <Route path="/contacts" element={<ContactsView />} />

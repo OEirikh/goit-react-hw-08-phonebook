@@ -4,19 +4,15 @@ import Navigatin from './Navigation/Navigation';
 import AuthNav from './AuthNav/AuthNav';
 import UserMenu from './UserMenu/UserMenu';
 import { useSelector } from 'react-redux';
-import { getIsLogin } from 'redux/AuthSlise';
+import { getLoggedin } from 'redux/AuthSlise';
 
 function AppBar() {
-  // const getToken = state => state.auth;
+  const Loggedin = useSelector(getLoggedin);
 
-  const isLogin = useSelector(getIsLogin);
-  console.log(isLogin);
-
-  // console.log(isLogin);
   return (
     <div>
       <Navigatin />
-      {!isLogin ? <AuthNav /> : <UserMenu />}
+      {!Loggedin ? <AuthNav /> : <UserMenu />}
     </div>
   );
 }

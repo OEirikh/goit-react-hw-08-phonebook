@@ -1,18 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import s from 'Components/ContactForm/ContactForm.module.css';
-import { setUser } from 'redux/AuthSlise';
-import { useDispatch } from 'react-redux';
 import { useUserLoginMutation } from 'redux/AuthApi';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userLogin, { data }] = useUserLoginMutation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    data && dispatch(setUser(data));
-  }, [data, dispatch]);
+  const [userLogin] = useUserLoginMutation();
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {

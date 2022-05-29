@@ -1,21 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import s from 'Components/ContactForm/ContactForm.module.css';
 import { useUserSignupMutation } from 'redux/AuthApi';
-import { setUser } from 'redux/AuthSlise';
 
 export default function RegisterView() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
-
-  const [userSignup, { data }] = useUserSignupMutation();
-
-  useEffect(() => {
-    data && dispatch(setUser(data));
-  }, [data, dispatch]);
+  const [userSignup] = useUserSignupMutation();
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {

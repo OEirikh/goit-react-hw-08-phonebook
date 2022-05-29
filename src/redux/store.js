@@ -24,6 +24,7 @@ import { AuthSlice } from './AuthSlise';
 const authPersistConfig = {
   key: 'auth',
   storage: storage,
+  whitelist: ['token'],
 };
 
 const persistedReducer = persistReducer(authPersistConfig, AuthSlice.reducer);
@@ -48,7 +49,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-console.log(store);
 
 setupListeners(store.dispatch);
