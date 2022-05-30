@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import s from 'Components/ContactForm/ContactForm.module.css';
 import { useUserLoginMutation } from 'redux/AuthApi';
 
@@ -27,15 +27,23 @@ export default function LoginView() {
       email: email,
       password: password,
     });
-    // isSuccess && <Navigate to="/contacts" replace={true} />;
     setEmail('');
     setPassword('');
+  };
+
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  const goBack = () => {
+    navigate(location?.state?.from || '/');
   };
 
   return (
     <div>
       {isSuccess && <Navigate to="/contacts" replace={true} />}
-      <h1>LoginView</h1>
+      <button type="button" onClick={goBack}>
+        goBack
+      </button>
       <form
         // autoComplete="off"
         onSubmit={handleSubmit}

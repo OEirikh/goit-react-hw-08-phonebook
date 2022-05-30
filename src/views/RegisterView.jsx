@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import s from 'Components/ContactForm/ContactForm.module.css';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useUserSignupMutation } from 'redux/AuthApi';
 
 export default function RegisterView() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userSignup] = useUserSignupMutation();
+  const [userSignup, { isSuccess }] = useUserSignupMutation();
 
   const handleInputChange = ({ currentTarget: { name, value } }) => {
     switch (name) {
@@ -32,9 +33,19 @@ export default function RegisterView() {
     setPassword('');
   };
 
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  const goBack = () => {
+    navigate(location?.state?.from || '/');
+  };
+
   return (
     <div>
-      <h1>RegisterView</h1>
+      {isSuccess && <Navigate to="/contacts" replace={true} />}
+      <button type="button" onClick={goBack}>
+        goBack
+      </button>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label className={s.form}>
           <p>Name</p>
