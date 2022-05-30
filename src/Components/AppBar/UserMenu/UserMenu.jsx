@@ -7,7 +7,7 @@ import { useUserLogoutMutation } from 'redux/AuthApi';
 
 function UserMenu() {
   const name = useSelector(getUserName);
-  const [userLogout, { isSuccess }] = useUserLogoutMutation();
+  const [userLogout] = useUserLogoutMutation();
 
   return (
     <div>

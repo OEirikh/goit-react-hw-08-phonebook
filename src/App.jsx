@@ -8,8 +8,10 @@ import { getToken } from 'redux/AuthSlise';
 import { useGetCurrentUserQuery } from 'redux/AuthApi';
 import { useSelector } from 'react-redux';
 
-import AppBar from 'Components/AppBar';
+import PrivateRoute from 'Components/PrivateRoure';
+import PublicRoute from 'Components/PublicRoute';
 
+const Layout = lazy(() => import('Components/Layout'));
 const HomeView = lazy(() => import('views/HomeView'));
 const RegisterView = lazy(() => import('views/RegisterView'));
 const LoginView = lazy(() => import('views/LoginView'));
@@ -23,14 +25,42 @@ function App() {
     <div className={s.App}>
       <Suspense>
         <ChakraProvider>
-          <AppBar />
-
           <Routes>
-            <Route path="/" element={<HomeView />} />
-            <Route path="/register" element={<RegisterView />} />
-            <Route path="/login" element={<LoginView />} />
-            <Route path="/contacts" element={<ContactsView />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <PublicRoute restricted>
+                    <HomeView />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute restricted>
+                    <RegisterView />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute restricted>
+                    <LoginView />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsView />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Route>
           </Routes>
 
           <ToastContainer
