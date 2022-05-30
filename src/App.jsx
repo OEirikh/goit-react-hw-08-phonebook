@@ -21,10 +21,7 @@ function App() {
   useGetCurrentUserQuery(null, { skip: !token });
 
   return (
-    <Box
-    // className={s.App}
-    // bgGradient="radial(gray.300, yellow.400, pink.200)"
-    >
+    <Box>
       <Suspense>
         <ChakraProvider>
           <Routes>
