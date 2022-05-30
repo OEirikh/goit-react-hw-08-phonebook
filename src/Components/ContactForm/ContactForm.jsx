@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAddContactsMutation, useGetContactQuery } from 'redux/ContactsApi';
 import { toast } from 'react-toastify';
-import s from './ContactForm.module.css';
+import { Stack, Input, Button } from '@chakra-ui/react';
 
 function ContactForm() {
   const [addContacts, { isLoading, isSuccess, error }] =
@@ -47,9 +47,10 @@ function ContactForm() {
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <label className={s.form}>
+      <Stack w="400px" mx="auto" my="6" spacing={4}>
         <p>Name</p>
-        <input
+
+        <Input
           onChange={handleInputChange}
           value={name}
           type="text"
@@ -57,10 +58,11 @@ function ContactForm() {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          className={s.input}
+          placeholder="Jacob Mercer"
         />
+
         <p>Number</p>
-        <input
+        <Input
           onChange={handleInputChange}
           value={number}
           type="tel"
@@ -68,16 +70,16 @@ function ContactForm() {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          className={s.input}
+          placeholder="111-111-11-11"
         />
-        <button
-          className={s.button}
+        <Button
+          colorScheme="gray"
           type="submit"
           disabled={number && name ? false : true}
         >
           {isLoading ? 'Add Contact...Spiner' : 'Add Contact'}
-        </button>
-      </label>
+        </Button>
+      </Stack>
     </form>
   );
 }

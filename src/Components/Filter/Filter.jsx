@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/FilterSlice';
-import s from './Filter.module.css';
+import { Stack, Input } from '@chakra-ui/react';
 
 function Filter() {
   const dispatch = useDispatch();
@@ -11,16 +11,15 @@ function Filter() {
   };
 
   return (
-    <label className={s.filter}>
-      Find contacts by name
-      <input
-        className={s.input}
+    <Stack w="400px" mx="auto" my="6" spacing={4}>
+      <p> Find contacts by name</p>
+      <Input
         onChange={onFilterChange}
         value={filterValue}
         type="text"
         name="filter"
       />
-    </label>
+    </Stack>
   );
 }
 

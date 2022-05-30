@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
-import s from 'App.module.css';
+// import s from 'App.module.css';
+import { Box } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -7,14 +8,12 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { getToken } from 'redux/AuthSlise';
 import { useGetCurrentUserQuery } from 'redux/AuthApi';
 import { useSelector } from 'react-redux';
-
 import PrivateRoute from 'Components/PrivateRoure';
 import PublicRoute from 'Components/PublicRoute';
-
 const Layout = lazy(() => import('Components/Layout'));
-const HomeView = lazy(() => import('views/HomeView'));
-const SignupView = lazy(() => import('views/ChakraSingUp'));
-const LoginView = lazy(() => import('views/ChakraLogin'));
+const AuthNavView = lazy(() => import('views/AuthNavView'));
+const SignUpView = lazy(() => import('views/SingUpView'));
+const SignInView = lazy(() => import('views/SignInView'));
 const ContactsView = lazy(() => import('views/ContactsView'));
 
 function App() {
@@ -22,7 +21,10 @@ function App() {
   useGetCurrentUserQuery(null, { skip: !token });
 
   return (
-    <div className={s.App}>
+    <Box
+    // className={s.App}
+    // bgGradient="radial(gray.300, yellow.400, pink.200)"
+    >
       <Suspense>
         <ChakraProvider>
           <Routes>
@@ -31,7 +33,7 @@ function App() {
                 index
                 element={
                   <PublicRoute restricted>
-                    <HomeView />
+                    <AuthNavView />
                   </PublicRoute>
                 }
               />
@@ -39,7 +41,7 @@ function App() {
                 path="/register"
                 element={
                   <PublicRoute restricted>
-                    <SignupView />
+                    <SignUpView />
                   </PublicRoute>
                 }
               />
@@ -47,7 +49,7 @@ function App() {
                 path="/login"
                 element={
                   <PublicRoute restricted>
-                    <LoginView />
+                    <SignInView />
                   </PublicRoute>
                 }
               />
@@ -70,7 +72,7 @@ function App() {
           />
         </ChakraProvider>
       </Suspense>
-    </div>
+    </Box>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-import s from './ContactListItem.module.css';
+import { Flex, Box, Button } from '@chakra-ui/react';
 import { useDeleteContactsMutation } from 'redux/ContactsApi';
 
 function ContactListItem({ name, number, id }) {
@@ -14,19 +14,18 @@ function ContactListItem({ name, number, id }) {
   }, [isSuccess, name, error]);
 
   return (
-    <li className={s.contact} key={id}>
-      <p>
+    <Box key={id} mb="5">
+      <Flex alignItems="center" justifyContent="space-between" w="400px" mb="5">
         {name}: {number}
-      </p>
-      <button
-        className={s.button}
-        type="button"
-        onClick={() => deleteContacts(id)}
-        disabled={isDeleting}
-      >
-        {isDeleting ? 'Delete...' : 'Delete'}
-      </button>
-    </li>
+        <Button
+          type="button"
+          onClick={() => deleteContacts(id)}
+          disabled={isDeleting}
+        >
+          {isDeleting ? 'Delete...' : 'Delete'}
+        </Button>
+      </Flex>
+    </Box>
   );
 }
 
