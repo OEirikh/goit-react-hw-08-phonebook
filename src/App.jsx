@@ -13,8 +13,8 @@ import PublicRoute from 'Components/PublicRoute';
 
 const Layout = lazy(() => import('Components/Layout'));
 const HomeView = lazy(() => import('views/HomeView'));
-const RegisterView = lazy(() => import('views/RegisterView'));
-const LoginView = lazy(() => import('views/LoginView'));
+const SignupView = lazy(() => import('views/ChakraSingUp'));
+const LoginView = lazy(() => import('views/ChakraLogin'));
 const ContactsView = lazy(() => import('views/ContactsView'));
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
                 path="/register"
                 element={
                   <PublicRoute restricted>
-                    <RegisterView />
+                    <SignupView />
                   </PublicRoute>
                 }
               />

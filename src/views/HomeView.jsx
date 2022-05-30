@@ -32,7 +32,8 @@ export default function WithBackgroundImage() {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
           >
-            Welcome, to use all the features, please register or log in
+            Welcome to the phonebook to take advantage of all the features,
+            register or login.
           </Text>
           <Stack direction={'row'}>
             <Button
@@ -53,7 +54,7 @@ export default function WithBackgroundImage() {
               color={'white'}
               _hover={{ bg: 'whiteAlpha.500' }}
             >
-              Log in
+              Sign in
             </Button>
           </Stack>
         </Stack>
