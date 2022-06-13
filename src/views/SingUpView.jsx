@@ -78,6 +78,7 @@ export default function SignupView() {
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
+          onSubmit={handleSubmit}
           p={8}
         >
           <Stack spacing={4}>
@@ -93,6 +94,7 @@ export default function SignupView() {
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
+                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
                 onChange={handleInputChange}
                 type="email"
                 value={email}
@@ -124,7 +126,6 @@ export default function SignupView() {
             <Stack spacing={10} pt={2}>
               <Button
                 type="submit"
-                onClick={handleSubmit}
                 disabled={name && email && password ? false : true}
                 loadingText="Submitting"
                 size="lg"

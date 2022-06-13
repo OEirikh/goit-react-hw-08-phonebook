@@ -71,12 +71,16 @@ export default function LoginView() {
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}
+          autoComplete="off"
+          onSubmit={handleSubmit}
         >
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
+                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
+                required
                 onChange={handleInputChange}
                 name="email"
                 value={email}
@@ -94,7 +98,6 @@ export default function LoginView() {
             <Stack spacing={10}>
               <Button
                 disabled={email && password ? false : true}
-                onClick={handleSubmit}
                 type="submit"
                 bg={'blue.400'}
                 color={'white'}
