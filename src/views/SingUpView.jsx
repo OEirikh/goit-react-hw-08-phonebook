@@ -74,6 +74,7 @@ export default function SignupView() {
           </Text>
         </Stack>
         <Box
+          as="form"
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}

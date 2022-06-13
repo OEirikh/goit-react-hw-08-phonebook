@@ -62,6 +62,7 @@ export default function LoginView() {
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
         </Stack>
         <Box
+          as="form"
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
