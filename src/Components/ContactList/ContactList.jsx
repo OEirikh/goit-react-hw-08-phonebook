@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { useGetContactQuery } from 'redux/ContactsApi';
 import ContactListItem from 'Components/ContactListItem';
 import { Spinner } from '@chakra-ui/react';
-// import s from './ContactList.module.css';
 
 function ContactList() {
   const { data, isFetching } = useGetContactQuery();
@@ -14,9 +13,7 @@ function ContactList() {
   return (
     <>
       {data && data.length !== 0 && (
-        <ul
-        // className={s.contactList}
-        >
+        <ul>
           {contacts.length !== 0 ? (
             contacts.map(contact => (
               <ContactListItem key={contact.id} {...contact} />

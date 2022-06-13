@@ -15,6 +15,8 @@ export const AuthApi = createApi({
     },
   }),
 
+  tagTypes: ['User'],
+
   endpoints: builder => ({
     getCurrentUser: builder.query({
       query: () => '/users/current',
